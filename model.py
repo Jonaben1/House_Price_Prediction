@@ -33,12 +33,12 @@ rescaledx = scaler.transform(x_train)
 model = RandomForestRegressor()
 model.fit(rescaledx, y_train)
 
-# saving the trained model
+# compress and save the trained model
 file = bz2.BZ2File('rf_model.pkl', 'wb')
 pickle.dump(model, file)
 file.close()
 
-# saving StandardScaler
+# compress and save StandardScaler
 s = bz2.BZ2File('scaler.pkl', 'wb')
 pickle.dump(stds, s)
 s.close()
