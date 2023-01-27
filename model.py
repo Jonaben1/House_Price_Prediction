@@ -3,6 +3,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split, KFold, cross_val_score
 import pickle
+import bz2
 
 data = pd.read_csv('housing.csv')
 
@@ -33,8 +34,12 @@ model = RandomForestRegressor()
 model.fit(rescaledx, y_train)
 
 # saving the trained model
-pickle.dump(model, open('rf_model.pkl', 'wb'))
+file = bz2.BZ2File('rf_model.pkl', 'wb')
+pickle.dump(model, file)
+file.close()
 
 # saving StandardScaler
-pickle.dump(stds, open('scaler.pkl', 'wb'))
+s = bz2.BZ2File('scaler.pkl', 'wb')
+pickle.dump(stds, s)
+s.close()
 
